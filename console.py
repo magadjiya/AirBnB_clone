@@ -2,43 +2,37 @@
 """
 The console module for managing objects
 """
-from cmd import Cmd
+import cmd
 import sys
 
 
-class TheConsole(Cmd):
+class HBNBCommand(cmd.Cmd):
     """
     The console class
     """
     prompt = "(hbnb) "
 
     def precmd(self, line):
-        if line != 'EOF':
-            line = line.lower()
+        exemptions = ['EOF', 'help EOF']
+        for line in exemptions:
+            if not line:
+                line = line.lower()
         return line
 
     def do_create(self, obj):
-        """
-        Creates an object
-        """
+        """Creates an object\n"""
         pass
 
     def do_retrieve(self, obj):
-        """
-        Retrieves an object from a file/database
-        """
+        """Retrieves an object from a file/database\n"""
         pass
 
     def do_destroy(self, obj):
-        """
-        Destroys an object
-        """
+        """Destroys an object\n"""
         pass
 
     def do_quit(self, line):
-        """
-        Exits console
-        """
+        """Quit command to exit the program\n"""
 
         self.postcmd(True, line)
 
@@ -48,9 +42,7 @@ class TheConsole(Cmd):
         return stop
 
     def do_EOF(self, line):
-        """
-        Exits console when EOF is returned
-        """
+        """Exits console: Ctrl-D\n"""
         return True
 
     def postloop(self):
@@ -58,4 +50,4 @@ class TheConsole(Cmd):
 
 
 if __name__ == '__main__':
-    TheConsole().cmdloop()
+    HBNBCommand().cmdloop()
