@@ -29,7 +29,7 @@ class TheConsole(Cmd):
         """
         pass
 
-    def do_destroy(self):
+    def do_destroy(self, obj):
         """
         Destroys an object
         """
