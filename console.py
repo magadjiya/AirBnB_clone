@@ -57,6 +57,5 @@ class TheConsole(Cmd):
         print()
 
 
-
 if __name__ == '__main__':
     TheConsole().cmdloop()
