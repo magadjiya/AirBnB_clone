@@ -17,7 +17,7 @@ class TheConsole(Cmd):
             line = line.lower()
         return line
 
-    def do_create(self):
+    def do_create(self, obj):
         """
         Creates an object
         """
