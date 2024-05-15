@@ -14,20 +14,34 @@ class HBNBCommand(cmd.Cmd):
 
     def precmd(self, line):
         exemptions = ['EOF', 'help EOF']
-        for line in exemptions:
-            if not line:
+        for exempt in exemptions:
+            if not exempt:
                 line = line.lower()
         return line
 
-    def do_create(self, obj):
+    def do_create(self, *args):
         """Creates an object\n"""
         pass
 
-    def do_retrieve(self, obj):
+    def do_show(self, *args):
+        """ Prints the string representation of an instance based on the
+class name and id\n"""
+        pass
+
+    def do_update(self, *args):
+        """Updates an instance based on the class name and id\n"""
+        pass
+
+    def do_all(self, *args):
+        """Prints all string representation of all instances based or not
+on the class name\n"""
+        pass
+
+    def do_retrieve(self, *args):
         """Retrieves an object from a file/database\n"""
         pass
 
-    def do_destroy(self, obj):
+    def do_destroy(self, *args):
         """Destroys an object\n"""
         pass
 
