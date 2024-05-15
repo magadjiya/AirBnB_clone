@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+"""
+The console module for managing objects
+"""
+from cmd import CMD
+
+
+class TheConsole(CMD):

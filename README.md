@@ -14,6 +14,9 @@ name HBNB (name also cloned, because devs sometimes suck at naming).
 Description of the Command Interpreter/Console:
 ----------------------------------------------
 
+An administrative tool used for creating/managing the data models in this
+project.
+
 The command interpreter exists for the following reasons:
 -   Create the data model
 -   Manage (create, update, destroy, etc) objects
