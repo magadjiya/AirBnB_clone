@@ -12,6 +12,11 @@ class TheConsole(Cmd):
     """
     prompt = "(hbnb) "
 
+    def precmd(self, line):
+        if line != 'EOF':
+            line = line.lower()
+        return line
+
     def do_create(self):
         """
         Creates an object
