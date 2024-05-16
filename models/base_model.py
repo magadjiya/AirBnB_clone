@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import datetime
+from datetime import datetime
 import uuid
 
 class BaseModel:
@@ -16,7 +16,8 @@ class BaseModel:
         """
         Returns string representation of an instance
         """
-        return ("[{}] ({}) {}".format(self.__class__.name__, self.id, self.__dict__)
+        return ("[{}] ({}) {}".format(self.__class__.__name__,
+                                      self.id, self.__dict__))
 
     def save(self):
         """
