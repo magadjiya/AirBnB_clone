@@ -5,6 +5,7 @@ The console module for managing objects
 import cmd
 import sys
 from models.base_model import BaseModel
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -25,11 +26,12 @@ class HBNBCommand(cmd.Cmd):
         if not args or args[0].strip() == "":
             print("** class name missing **")
         else:
+            command_dict = {'BaseModel': BaseModel, 'User': User}
             command = args[0].strip()
-            if command != 'BaseModel':
+            if command not in command_dict:
                 print("** class doesn't exist **")
             else:                      
-                my_model = BaseModel()
+                my_model = command_dict[command]()
                 my_model.save()
             
     def do_show(self, *args):
