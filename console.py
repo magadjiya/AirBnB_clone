@@ -4,6 +4,7 @@ The console module for managing objects
 """
 import cmd
 import sys
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -21,8 +22,16 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, *args):
         """Creates an object\n"""
-        pass
-
+        if not args or args[0].strip() == "":
+            print("** class name missing **")
+        else:
+            command = args[0].strip()
+            if command != 'BaseModel':
+                print("** class doesn't exist **")
+            else:                      
+                my_model = BaseModel()
+                my_model.save()
+            
     def do_show(self, *args):
         """ Prints the string representation of an instance based on the
 class name and id\n"""
