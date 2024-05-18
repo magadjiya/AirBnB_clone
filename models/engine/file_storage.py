@@ -29,7 +29,8 @@ class FileStorage():
         if os.path.exists(self.__file_path):
             if os.path.getsize(self.__file_path) > 0:
                 try:
-                    with open(self.__file_path, mode='r', encoding='utf-8') as file2:
+                    with open(self.__file_path, mode='r',
+                              encoding='utf-8') as file2:
                         self.__objects = json.load(file2)
                 except json.JSONDecodeError:
                     self.__objects = {}

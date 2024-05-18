@@ -13,6 +13,7 @@ class HBNBCommand(cmd.Cmd):
     The console class
     """
     prompt = "(hbnb) "
+    command_dict = {'BaseModel': BaseModel, 'User': User}
 
     def precmd(self, line):
         exemptions = ['EOF', 'help EOF']
@@ -26,18 +27,27 @@ class HBNBCommand(cmd.Cmd):
         if not args or args[0].strip() == "":
             print("** class name missing **")
         else:
-            command_dict = {'BaseModel': BaseModel, 'User': User}
             command = args[0].strip()
-            if command not in command_dict:
+            if command not in self.command_dict:
                 print("** class doesn't exist **")
-            else:                      
-                my_model = command_dict[command]()
+            else:
+                my_model = self.command_dict[command]()
                 my_model.save()
-            
+
     def do_show(self, *args):
         """ Prints the string representation of an instance based on the
 class name and id\n"""
-        pass
+        if not args or args[0].strip() == "":
+            print("** class name missing **")
+        else:
+            arguments = args[0].strip().split()
+            if len(arguments) != 2:
+                print("** instance id missing **")
+            else:
+                if arguments[0] in self.command_dict:
+                    pass
+                else:
+                    print("** class doesn't exist **")
 
     def do_update(self, *args):
         """Updates an instance based on the class name and id\n"""
