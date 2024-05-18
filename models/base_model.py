@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Module that defines the base model from which other models inherit from
 
 from datetime import datetime
 from models import storage
