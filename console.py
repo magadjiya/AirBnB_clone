@@ -92,7 +92,11 @@ on the class name\n"""
             print(all_objects)
         elif len(arguments) == 1:
             if arguments[0] in self.command_dict:
-                print(all_objects)
+                objects_of_class = {
+                    key: all_objects[key] for key in all_objects
+                    if all_objects[key]['__class__'] == arguments[0]
+                }
+                print(objects_of_class)
             else:
                 print("** class doesn't exist **")
 
