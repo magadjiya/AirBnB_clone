@@ -62,25 +62,26 @@ class name and id\n"""
             print("** class name missing **")
         else:
             arguments = args[0].strip().split()
-            if arguments[0] in self.command_dict:
-                if arguments[0] in self.command_dict:
-                    if len(arguments) == 1:
-                        print("** instance id missing **")
-                    elif len(arguments) == 2:
-                        print("** attribute name missing **")
-                    elif len(arguments) == 3:
-                        print("** value missing **")
-                    elif len(arguments) > 3:
-                        all_objects = storage.all()
-                        instance_id = "{}.{}".format(arguments[0], arguments[1])
-                        if instance_id in all_objects:
-                            if len(arguments) >= 4:
-                                all_objects[instance_id][arguments[2]] = arguments[3]
-                                storage.save()
-                            else:
-                                print("** no instance found **")
-                else:
+            if arguments[0] not in self.command_dict:
                     print("** class doesn't exist **")
+            else:
+                if len(arguments) == 1:
+                    print("** instance id missing **")
+                elif len(arguments) == 2:
+                    print("** attribute name missing **")
+                elif len(arguments) == 3:
+                    print("** value missing **")
+                elif len(arguments) > 3:
+                    all_objects = storage.all()
+                    instance_id = "{}.{}".format(arguments[0],
+                                                 arguments[1])
+                    if instance_id not in all_objects:
+                        print("** no instance found **")
+                    else:
+                        if len(arguments) >= 4:
+                            all_objects[instance_id][arguments[2]] = \
+                                arguments[3]
+                            storage.save()
 
     def do_all(self, *args):
         """Prints all string representation of all instances based or not
