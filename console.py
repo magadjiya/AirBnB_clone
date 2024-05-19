@@ -81,7 +81,11 @@ on the class name\n"""
         return True
 
     def postloop(self):
-        print()
+        pass
+
+    def default(self, line):
+        if not line.strip():
+            return
 
 
 if __name__ == '__main__':
