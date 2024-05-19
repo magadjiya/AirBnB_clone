@@ -1,10 +1,16 @@
 #!/usr/bin/python3
-# Module that defines the User Class
+"""Module that defines the User Class"""
 from models.base_model import BaseModel
 
 
 class User(BaseModel):
+    """
+    Defines the User Class. The User class inherits from the BaseModel class
+    """
     def __init__(self, *args, **kwargs):
+        """
+        Initializes the User Class
+        """
         super().__init__(*args, **kwargs)
         self.email = ''
         self.password = ''
