@@ -9,6 +9,12 @@ class TestBaseModel(unittest.TestCase):
     Test cases for `BaseModel` class
     """
 
+    def setUp(self):
+        """
+        Class needed for testing
+        """
+        pass
+
     def test_inputs(self):
         """
         Tests normal inputs for the BaseModel
@@ -19,6 +25,9 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual([my_model.name, my_model.number], ["Ebuka", 89])
 
     def test_datetime(self):
+        """
+        Test for datetime attribute
+        """
         pass
 
 if __name__ == '__main__':
