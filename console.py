@@ -5,6 +5,7 @@ The console module for managing objects
 import cmd
 import sys
 from models.base_model import BaseModel
+from models import storage
 from models.user import User
 
 
@@ -45,7 +46,12 @@ class name and id\n"""
                 print("** instance id missing **")
             else:
                 if arguments[0] in self.command_dict:
-                    pass
+                    all_objects = storage.all()
+                    instance_id = "{}.{}".format(arguments[0], arguments[1])
+                    if instance_id in all_objects:
+                        print(all_objects[instance_id])
+                    else:
+                        print("** no instance found **")
                 else:
                     print("** class doesn't exist **")
 
@@ -56,7 +62,15 @@ class name and id\n"""
     def do_all(self, *args):
         """Prints all string representation of all instances based or not
 on the class name\n"""
-        pass
+        all_objects = storage.all()
+        arguments = args[0].strip().split()
+        if len(arguments) == 0:
+            print(all_objects)
+        elif len(arguments) == 1:
+            if arguments[0] in self.command_dict:
+                print(all_objects)
+            else:
+                print("** class doesn't exist **")
 
     def do_retrieve(self, *args):
         """Retrieves an object from a file/database\n"""
@@ -64,6 +78,24 @@ on the class name\n"""
 
     def do_destroy(self, *args):
         """Destroys an object\n"""
+        if not args or args[0].strip() == "":
+            print("** class name missing **")
+        else:
+            arguments = args[0].strip().split()
+            if len(arguments) != 2:
+                print("** instance id missing **")
+            else:
+                if arguments[0] in self.command_dict:
+                    all_objects = storage.all()
+                    instance_id = "{}.{}".format(arguments[0], arguments[1])
+                    if instance_id in all_objects:
+                        del all_objects[instance_id]
+                        storage.save()
+                    else:
+                        print("** no instance found **")
+                else:
+                    print("** class doesn't exist **")
+
         pass
 
     def do_quit(self, line):
