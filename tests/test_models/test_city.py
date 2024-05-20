@@ -27,7 +27,7 @@ class TestCity(unittest.TestCase):
         """
         my_city = City()
         my_city.state_id = '11111'
-        self.assertEqual(my_city.state_id, '00000')
+        self.assertEqual(my_city.state_id, '11111')
 
 
 if __name__ == '__main__':

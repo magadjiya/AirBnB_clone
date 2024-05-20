@@ -22,7 +22,7 @@ class TestBaseModel(unittest.TestCase):
         my_model = BaseModel()
         my_model.name = "Ebuka"
         my_model.number = 89
-        self.assertEqual([my_model.name, my_model.number], ["Ebuka", 98])
+        self.assertEqual([my_model.name, my_model.number], ["Ebuka", 89])
 
     def test_datetime(self):
         """

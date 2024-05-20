@@ -27,7 +27,7 @@ class TestUser(unittest.TestCase):
         """
         my_user = User()
         my_user.name = "Maverick"
-        self.assertEqual(my_user.name, "not_Maverick")
+        self.assertEqual(my_user.name, "Maverick")
 
 
 if __name__ == '__main__':

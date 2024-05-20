@@ -27,7 +27,7 @@ class TestReview(unittest.TestCase):
         """
         my_review = Review()
         my_review.text = "very good"
-        self.assertEqual(my_review.text, "very bad")
+        self.assertEqual(my_review.text, "very good")
 
 
 if __name__ == '__main__':

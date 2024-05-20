@@ -27,7 +27,7 @@ class TestState(unittest.TestCase):
         """
         my_state = State()
         my_state.name = "Florida"
-        self.assertEqual(my_state.name, "Los Angeles")
+        self.assertEqual(my_state.name, "Florida")
 
 
 if __name__ == '__main__':
