@@ -147,9 +147,9 @@ on the class name\n"""
     def postloop(self):
         print()
 
-    def default(self, line):
-        if not line.strip():
-            return
+    def emptyline(self):
+        """Do nothing on empty input line"""
+        pass
 
 
 if __name__ == '__main__':
