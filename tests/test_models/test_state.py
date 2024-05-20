@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Test file for User Class"""
 import unittest
+from models.state import State
 
 
 class TestState(unittest.TestCase):
@@ -19,6 +20,14 @@ class TestState(unittest.TestCase):
         Tests attributes assignment with expected values
         """
         pass
+
+    def test_defaults(self):
+        """
+        Test defaults for State Class
+        """
+        my_state = State()
+        my_state.name = "Florida"
+        self.assertEqual(my_state.name, "Los Angeles")
 
 if __name__ == '__main__':
     unittest.main()

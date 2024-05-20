@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """Test file for User Class"""
 import unittest
-from models.amenity import Amenity
+from models.city import City
 
 
-class TestAmenity(unittest.TestCase):
+class TestCity(unittest.TestCase):
     """
     Tests the User data model
     """
@@ -21,13 +21,13 @@ class TestAmenity(unittest.TestCase):
         """
         pass
 
-    def test_default(self):
+    def test_defaults(self):
         """
-        Tests default attributes
+        Testing default values
         """
-        my_amenity = Amenity()
-        my_amenity.name = "anything"
-        self.assertEqual(my_amenity.name, "not_anything")
+        my_city = City()
+        my_city.state_id = '11111'
+        self.assertEqual = '00000'
 
 if __name__ == '__main__':
     unittest.main()
