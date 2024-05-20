@@ -14,7 +14,10 @@ class HBNBCommand(cmd.Cmd):
     The console class
     """
     prompt = "(hbnb) "
-    command_dict = {'BaseModel': BaseModel, 'User': User}
+    command_dict = {'BaseModel': BaseModel, 'User': User,
+                    'State': State, 'City': City,
+                    'Amenity': Amenity, 'Place': Place,
+                    'Review': Review}
 
     def precmd(self, line):
         exemptions = ['EOF', 'help EOF']
