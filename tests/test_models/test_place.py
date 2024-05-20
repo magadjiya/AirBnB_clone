@@ -29,5 +29,6 @@ class TestPlace(unittest.TestCase):
         my_place.latitude = 5
         self.assertEqual(my_place.latitude, 10)
 
+
 if __name__ == '__main__':
     unittest.main()

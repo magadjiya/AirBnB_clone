@@ -29,5 +29,6 @@ class TestReview(unittest.TestCase):
         my_review.text = "very good"
         self.assertEqual(my_review.text, "very bad")
 
+
 if __name__ == '__main__':
     unittest.main()

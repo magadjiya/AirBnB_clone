@@ -29,5 +29,6 @@ class TestAmenity(unittest.TestCase):
         my_amenity.name = "anything"
         self.assertEqual(my_amenity.name, "not_anything")
 
+
 if __name__ == '__main__':
     unittest.main()

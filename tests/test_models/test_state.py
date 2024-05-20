@@ -29,5 +29,6 @@ class TestState(unittest.TestCase):
         my_state.name = "Florida"
         self.assertEqual(my_state.name, "Los Angeles")
 
+
 if __name__ == '__main__':
     unittest.main()
