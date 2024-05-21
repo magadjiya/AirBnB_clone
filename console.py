@@ -37,7 +37,7 @@ class HBNBCommand(cmd.Cmd):
         if not args or args[0].strip() == "":
             print("** class name missing **")
         else:
-            command = args[0].strip()
+            command = args.strip()
             if command not in self.command_dict:
                 print("** class doesn't exist **")
             else:
@@ -48,10 +48,10 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, args):
         """ Prints the string representation of an instance based on the
 class name and id\n"""
-        if not args or args[0].strip() == "":
+        if not args or args.strip() == "":
             print("** class name missing **")
         else:
-            arguments = args[0].strip().split()
+            arguments = args.strip().split()
             if arguments[0] not in self.command_dict:
                 print("** class doesn't exist **")
             else:
@@ -67,11 +67,11 @@ class name and id\n"""
 
     def do_update(self, args):
         """Updates an instance based on the class name and id\n"""
-        if not args or args[0].strip() == "":
+        if not args or args.strip() == "":
             print("** class name missing **")
         else:
-            arguments = args[0].strip().split()
-            if arguments[0] not in self.command_dict:
+            arguments = args.strip().split()
+            if arguments not in self.command_dict:
                 print("** class doesn't exist **")
             else:
                 if len(arguments) == 1:
@@ -110,10 +110,10 @@ on the class name\n"""
 
     def do_destroy(self, args):
         """Destroys an object\n"""
-        if not args or args[0].strip() == "":
+        if not args or args.strip() == "":
             print("** class name missing **")
         else:
-            arguments = args[0].strip().split()
+            arguments = args.strip().split()
             if len(arguments) != 2:
                 print("** instance id missing **")
             else:
