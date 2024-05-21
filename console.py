@@ -48,18 +48,20 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, args):
         """ Prints the string representation of an instance based on the
 class name and id\n"""
-        if not args or args.strip() == "":
+        if args is None or args.strip() == "":
             print("** class name missing **")
         else:
-            arguments = args.strip().split()
-            if arguments[0] not in self.command_dict:
+            args = args.split()
+            class_name = args[0]
+            if class_name not in self.command_dict:
                 print("** class doesn't exist **")
             else:
-                if len(arguments) != 2:
+                if len(args) < 2:
                     print("** instance id missing **")
                 else:
+                    id_str = args[1]
                     all_objects = storage.all()
-                    instance_id = "{}.{}".format(arguments[0], arguments[1])
+                    instance_id = "{}.{}".format(class_name, id_str)
                     if instance_id in all_objects:
                         print(all_objects[instance_id])
                     else:
@@ -158,14 +160,18 @@ on the class name\n"""
     def default(self, line):
         """Handles default behaviour of console\n"""
         line = line.strip()
-        if '.' in line and '(' in line and ')' in line:
-            class_name, command = line.split('.', 1)
-            command = command.split('(', 1)[0]
-            if class_name in self.command_dict:
-                if command == 'all':
-                    self.do_all(class_name)
-                elif command == 'count':
-                    self.do_count(class_name)
+        if '.' in line:
+            class_name, command_with_id = line.split('.', 1)
+            if '(' in command_with_id and ')' in command_with_id:
+                command, id_str = command_with_id.split('(', 1)
+                id_str = id_str.rstrip(')')
+                if class_name in self.command_dict:
+                    if command == 'all':
+                        self.do_all(class_name)
+                    elif command == 'count':
+                        self.do_count(class_name)
+                    elif command == 'show':
+                        self.do_show("{} {}".format(class_name, id_str))
         else:
             super().default(line)
 
