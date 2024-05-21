@@ -25,6 +25,7 @@ class HBNBCommand(cmd.Cmd):
                     'Review': Review}
 
     def precmd(self, line):
+        """Executes when the console is started\n"""
         exemptions = ['EOF', 'help EOF']
         for exempt in exemptions:
             if not exempt:
@@ -129,10 +130,10 @@ on the class name\n"""
 
     def do_quit(self, line):
         """Quit command to exit the program\n"""
-
         self.postcmd(True, line)
 
     def postcmd(self, stop, line):
+        """Exits the console\n"""
         if line.strip() == 'quit':
             sys.exit()
         return stop
@@ -142,13 +143,15 @@ on the class name\n"""
         return True
 
     def postloop(self):
+        """Executes before console exits\n"""
         print()
 
     def emptyline(self):
-        """Do nothing on empty input line"""
+        """Do nothing on empty input line\n"""
         pass
 
     def default(self, line):
+        """Handles default behaviour of console\n"""
         line = line.strip()
         if '.' in line and '(' in line and ')' in line:
             class_name, command = line.split('.', 1)
