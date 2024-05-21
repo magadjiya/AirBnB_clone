@@ -17,15 +17,13 @@ class FileStorage():
         return self.__objects
 
     def new(self, obj):
+        serialized_obj = obj.to_dict()
         self.__objects['{}.{}'.format(obj.__class__.__name__,
-                                      obj.id)] = obj
+                                      obj.id)] = serialized_obj
 
     def save(self):
         with open(self.__file_path, mode='w', encoding='utf-8') as file1:
-            objects_dict = {}
-            for key, value in self.__objects.items():
-                objects_dict[key] = value.to_dict()
-            json.dump(objects_dict, file1)
+            json.dump(self.__objects, file1)
 
     def reload(self):
         if os.path.exists(self.__file_path):

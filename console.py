@@ -71,7 +71,7 @@ class name and id\n"""
             print("** class name missing **")
         else:
             arguments = args.strip().split()
-            if arguments not in self.command_dict:
+            if arguments[0] not in self.command_dict:
                 print("** class doesn't exist **")
             else:
                 if len(arguments) == 1:
