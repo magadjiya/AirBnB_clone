@@ -128,6 +128,11 @@ on the class name\n"""
                 else:
                     print("** class doesn't exist **")
 
+    def do_count(self, class_name):
+        all_objects = storage.all()
+        count = sum(1 for obj in all_objects.values() if obj['__class__'] == class_name)
+        print(count)
+
     def do_quit(self, line):
         """Quit command to exit the program\n"""
         self.postcmd(True, line)
@@ -156,8 +161,11 @@ on the class name\n"""
         if '.' in line and '(' in line and ')' in line:
             class_name, command = line.split('.', 1)
             command = command.split('(', 1)[0]
-            if class_name in self.command_dict and command == 'all':
-                self.do_all(class_name)
+            if class_name in self.command_dict:
+                if command == 'all':
+                    self.do_all(class_name)
+                elif command == 'count':
+                    self.do_count(class_name)
         else:
             super().default(line)
 

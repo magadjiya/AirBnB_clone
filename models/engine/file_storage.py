@@ -32,7 +32,7 @@ class FileStorage():
                           encoding='utf-8') as file2:
                     self.__objects = json.load(file2)
             else:
-                open(self.__file_path, 'w').close()
                 self.__objects = {}
         else:
-            pass
+            open(self.__file_path, 'w').close()
+            self.__objects = {}
