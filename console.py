@@ -115,13 +115,15 @@ on the class name\n"""
         if not args or args.strip() == "":
             print("** class name missing **")
         else:
-            arguments = args.strip().split()
-            if len(arguments) != 2:
+            args = args.split()
+            class_name = args[0]
+            if args[1] is None:
                 print("** instance id missing **")
             else:
-                if arguments[0] in self.command_dict:
+                id_str = args[1]
+                if class_name in self.command_dict:
                     all_objects = storage.all()
-                    instance_id = "{}.{}".format(arguments[0], arguments[1])
+                    instance_id = "{}.{}".format(class_name, id_str)
                     if instance_id in all_objects:
                         del all_objects[instance_id]
                         storage.save()
@@ -172,6 +174,8 @@ on the class name\n"""
                         self.do_count(class_name)
                     elif command == 'show':
                         self.do_show("{} {}".format(class_name, id_str))
+                    elif command == 'destroy':
+                        self.do_destroy("{} {}".format(class_name, id_str))
         else:
             super().default(line)
 
