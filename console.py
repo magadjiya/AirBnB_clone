@@ -31,7 +31,7 @@ class HBNBCommand(cmd.Cmd):
                 line = line.lower()
         return line
 
-    def do_create(self, *args):
+    def do_create(self, args):
         """Creates an object\n"""
         if not args or args[0].strip() == "":
             print("** class name missing **")
@@ -44,27 +44,27 @@ class HBNBCommand(cmd.Cmd):
                 print(my_model.id)
                 my_model.save()
 
-    def do_show(self, *args):
+    def do_show(self, args):
         """ Prints the string representation of an instance based on the
 class name and id\n"""
         if not args or args[0].strip() == "":
             print("** class name missing **")
         else:
             arguments = args[0].strip().split()
-            if len(arguments) != 2:
-                print("** instance id missing **")
+            if arguments[0] not in self.command_dict:
+                print("** class doesn't exist **")
             else:
-                if arguments[0] in self.command_dict:
+                if len(arguments) != 2:
+                    print("** instance id missing **")
+                else:
                     all_objects = storage.all()
                     instance_id = "{}.{}".format(arguments[0], arguments[1])
                     if instance_id in all_objects:
                         print(all_objects[instance_id])
                     else:
                         print("** no instance found **")
-                else:
-                    print("** class doesn't exist **")
 
-    def do_update(self, *args):
+    def do_update(self, args):
         """Updates an instance based on the class name and id\n"""
         if not args or args[0].strip() == "":
             print("** class name missing **")
@@ -91,24 +91,23 @@ class name and id\n"""
                                 arguments[3]
                             storage.save()
 
-    def do_all(self, *args):
+    def do_all(self, class_name):
         """Prints all string representation of all instances based or not
 on the class name\n"""
         all_objects = storage.all()
-        arguments = args[0].strip().split()
-        if len(arguments) == 0:
+        if class_name is None or class_name.strip() == "":
             print(all_objects)
-        elif len(arguments) == 1:
-            if arguments[0] in self.command_dict:
-                objects_of_class = {
-                    key: all_objects[key] for key in all_objects
-                    if all_objects[key]['__class__'] == arguments[0]
-                }
-                print(objects_of_class)
-            else:
-                print("** class doesn't exist **")
+        elif class_name not in self.command_dict:
+            print("** class doesn't exist **")
+        else:
+            class_name = class_name.strip()
+            objects_of_class = {
+                key: all_objects[key] for key in all_objects
+                if all_objects[key]['__class__'] == class_name
+            }
+            print(objects_of_class)
 
-    def do_destroy(self, *args):
+    def do_destroy(self, args):
         """Destroys an object\n"""
         if not args or args[0].strip() == "":
             print("** class name missing **")
@@ -127,8 +126,6 @@ on the class name\n"""
                         print("** no instance found **")
                 else:
                     print("** class doesn't exist **")
-
-        pass
 
     def do_quit(self, line):
         """Quit command to exit the program\n"""
@@ -150,6 +147,16 @@ on the class name\n"""
     def emptyline(self):
         """Do nothing on empty input line"""
         pass
+
+    def default(self, line):
+        line = line.strip()
+        if '.' in line and '(' in line and ')' in line:
+            class_name, command = line.split('.', 1)
+            command = command.split('(', 1)[0]
+            if class_name in self.command_dict and command == 'all':
+                self.do_all(class_name)
+        else:
+            super().default(line)
 
 
 if __name__ == '__main__':
