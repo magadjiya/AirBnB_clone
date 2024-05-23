@@ -72,27 +72,43 @@ class name and id\n"""
         if not args or args.strip() == "":
             print("** class name missing **")
         else:
-            arguments = args.strip().split()
-            if arguments[0] not in self.command_dict:
+            args = args.split()
+            class_name = args[0]
+            if class_name not in self.command_dict:
                 print("** class doesn't exist **")
             else:
-                if len(arguments) == 1:
+                if len(args) == 1:
                     print("** instance id missing **")
-                elif len(arguments) == 2:
+                elif len(args) == 2:
                     print("** attribute name missing **")
-                elif len(arguments) == 3:
+                elif len(args) == 3:
                     print("** value missing **")
-                elif len(arguments) > 3:
+                elif len(args) >= 4:
                     all_objects = storage.all()
-                    instance_id = "{}.{}".format(arguments[0],
-                                                 arguments[1])
+                    instance_id = "{}.{}".format(class_name,
+                                                 args[1])
                     if instance_id not in all_objects:
                         print("** no instance found **")
                     else:
-                        if len(arguments) >= 4:
-                            all_objects[instance_id][arguments[2]] = \
-                                arguments[3]
-                            storage.save()
+                        obj = storage.all()[instance_id]
+                        if len(args) == 4:
+                            attr_name = args[2]
+                            attr_value = args[3]
+                            setattr(obj, attr_name, attr_value)
+                            obj.save()
+                        elif len(args) > 4:
+                            attr_dict = {}
+                            for i in range(2, len(args), 2):
+                                attr_name = args[i]
+                                attr_value = args[i+1]
+                                attr_dict[attr_name] = attr_value
+                            obj.update(attr_dict)
+                            obj.save
+                        else:
+                            attr_dict = eval(args[2])
+                            obj.update(attr_dict)
+                            obj.save()
+
 
     def do_all(self, class_name):
         """Prints all string representation of all instances based or not
@@ -176,6 +192,8 @@ on the class name\n"""
                         self.do_show("{} {}".format(class_name, id_str))
                     elif command == 'destroy':
                         self.do_destroy("{} {}".format(class_name, id_str))
+                    elif command == 'update':
+                        self.do_update("{} {}".format(class_name, id_str))
         else:
             super().default(line)
 
